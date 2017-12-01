@@ -1,2 +1,2 @@
 # AdventOfCode
-AdventOfCode solution attempts
+Advent of Code solution attempts
