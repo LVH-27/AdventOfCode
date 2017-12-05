@@ -1,5 +1,5 @@
 # sector = int(input())
-sector =  325489
+sector = 5  # 325489
 
 direction = 0  # 0 - RIGHT, 1 - UP, 2 - LEFT, 3 - DOWN
 step_size = 1  # step size for a given spiral direction iteration
@@ -28,11 +28,18 @@ def change_direction():
 
 
 for i in range(sector):
-	for j in range(step_size):
-		steps[direction] += 1 if not decrement else -1
-		if i + j == sector:
-			done = True
-			break
+
+	if sector - i > step_size:  # granulation control
+		steps[direction] += step_size if not decrement else -step_size
+		i += step_size - 1
+
+	else:
+		for j in range(step_size):
+			if i == sector - 1:
+				done = True
+				break
+			steps[direction] += 1 if not decrement else -1
+			i += 1
 
 	if done:
 		break
