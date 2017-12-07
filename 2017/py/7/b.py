@@ -1,3 +1,32 @@
+class Node:
+	def __init__(id, weight, children=None, parent=None):
+		self.id = id
+		self.weight = weight
+		self.children = children
+		self.parent = parent
+		self.subtree_weight = None
+
+	def calculate_subtree_weight(self):
+		if self.subtree_weight is None:
+			self.subtree_weight = weight
+			try:
+				for child in children:
+					self.subtree_weight += child.calculate_subtree_weight()
+			except TypeError as e:
+				pass
+			return self.subtree_weight
+
+	def calculate_node_depth(self, root):
+		if self == root:
+			return 0
+
+		try:
+			for child in self.children:
+				pass
+		except TypeError as e:
+			pass
+
+
 programs = {}
 def input_programs(filename):
 	global programs
@@ -34,14 +63,6 @@ def get_root_program():
 		if programs[program]['parent'] is None:
 			return program
 
-def calculate_subtree_weights():
-	global programs
-	for program in programs:
-		programs[program]['subtree_weight'] = programs[program]['weight']
-
-		if programs[program]['children'] is not None:
-			for child in programs[program]['children']:
-				programs[program]['subtree_weight'] += calculate_subtree_weight(child)
 
 
 def get_unbalanced_node():
