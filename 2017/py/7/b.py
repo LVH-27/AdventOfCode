@@ -20,11 +20,14 @@ class Node:
 		if self == root:
 			return 0
 
-		try:
-			for child in self.children:
+		if self.children is None:
+			raise ValueError("Node not found!")
+
+		for child in self.children:
+			try:
+				return 1 + child.calculate_node_depth(self)
+			except ValueError as e:
 				pass
-		except TypeError as e:
-			pass
 
 
 programs = {}
@@ -64,11 +67,35 @@ def get_root_program():
 			return program
 
 
+def get_mode(tl):
+	counter = {}
+	for element in tl:
+		if element in counter:
+			counter[element] += 1
+		else:
+			counter[element] = 1
 
-def get_unbalanced_node():
-	for level
+	max_count_element = 0
+	for count in counter:
+		if counter[count] > max_count:
+			max_count = count
+
+	return max_count
+
+def get_unbalanced_node(root):
+	child_weights = []
+	for child in root.children:
+		child_weights.append(child.subtree_weight)
+
+	if len(child_weights) != len(set(child_weights)):
+		return get_mode(child_weights)
+	else:
+		for child in root.children:
+			get_unbalanced_node(child)
+
+
 
 
 input_programs("in.txt")
-print(get_root_program())
-print(get_unbalanced_node())
+root = get_root_program()
+print(get_unbalanced_node(root))
